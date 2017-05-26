@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="css/cssreset.css">
+</head>
+<body>
+
+<div id="main" style="width: 80%;height:400px;"></div>
+
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript" src="js/appData.js"></script>
+<script type="text/javascript" src="js/echarts.common.min.js"></script>
+<script type="text/javascript">
+
+	appData.length = 12;
+
+	var appNameArr = [];
+	var useNumArr = [];
+	var zengFuArr = [];
+
+	for(var i in appData) {
+		appNameArr.push(appData[i].AppName);
+		useNumArr.push(appData[i].UseNum);
+		zengFuArr.push(appData[i].Growth);
+	}
+
+	var myChart = echarts.init(document.getElementById('main'));
+	var option = {
+		title: {
+			text: '2017年4月全部行业APP月度独立设备数'
+		},
+		tooltip : {
+		},
+		legend: {
+			data:['设备数', '环比增幅']
+		},
+		xAxis: {
+			data: appNameArr
+		},
+		yAxis: [
+			{
+				type: 'value',
+				name: '设备数'
+			},
+			{
+				type: 'value',
+				name: '环比增幅'
+			}
+		],
+		series: [{
+			name: '设备数',
+			type: 'bar',
+			data: useNumArr
+		},
+		{
+			name:'环比增幅',
+			type:'line',
+			yAxisIndex: 1,
+			data: zengFuArr
+		}
+		]
+	};
+
+	myChart.setOption(option);
+</script>
+</body>
+</html>
